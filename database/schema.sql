@@ -1,0 +1,10 @@
+CREATE TABLE users (id UUID PRIMARY KEY, email TEXT UNIQUE NOT NULL, display_name TEXT NOT NULL, role TEXT NOT NULL CHECK (role IN ('Buyer','Supplier','Procurement Manager','Logistics Provider','Administrator')), password_hash TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE suppliers (id TEXT PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, location TEXT NOT NULL, rating NUMERIC(2,1) NOT NULL DEFAULT 0, available_capacity NUMERIC(14,2) NOT NULL DEFAULT 0, unit_price NUMERIC(14,2) NOT NULL DEFAULT 0, lead_days INTEGER NOT NULL DEFAULT 0, verified BOOLEAN NOT NULL DEFAULT false);
+CREATE TABLE demands (id TEXT PRIMARY KEY, buyer_name TEXT NOT NULL, item TEXT NOT NULL, quantity NUMERIC(14,2) NOT NULL CHECK (quantity > 0), unit TEXT NOT NULL, destination TEXT NOT NULL, due_date DATE NOT NULL, status TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE purchase_orders (id TEXT PRIMARY KEY, demand_id TEXT NOT NULL REFERENCES demands(id), total NUMERIC(16,2) NOT NULL DEFAULT 0, status TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE TABLE order_allocations (id BIGSERIAL PRIMARY KEY, order_id TEXT NOT NULL REFERENCES purchase_orders(id), supplier_id TEXT NOT NULL REFERENCES suppliers(id), quantity NUMERIC(14,2) NOT NULL, unit_price NUMERIC(14,2) NOT NULL);
+CREATE TABLE shipments (id TEXT PRIMARY KEY, order_id TEXT NOT NULL REFERENCES purchase_orders(id), carrier TEXT NOT NULL, status TEXT NOT NULL, origin TEXT, destination TEXT NOT NULL, eta DATE);
+CREATE TABLE audit_events (id UUID PRIMARY KEY, action TEXT NOT NULL, entity TEXT NOT NULL, happened_at TIMESTAMPTZ NOT NULL DEFAULT now());
+CREATE INDEX demands_status_idx ON demands(status);
+CREATE INDEX orders_status_idx ON purchase_orders(status);
+CREATE INDEX audit_happened_at_idx ON audit_events(happened_at DESC);

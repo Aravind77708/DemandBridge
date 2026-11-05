@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: demandbridge
+    runtime: node
+    plan: starter
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: API_BASE_URL
+        value: ""
+      - key: DATA_FILE
+        value: /var/data/data.json
+      - key: CORS_ORIGINS
+        sync: false
+    disk:
+      name: demandbridge-data
+      mountPath: /var/data
+      sizeGB: 1

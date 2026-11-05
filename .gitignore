@@ -1,0 +1,38 @@
+﻿# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+credentials.*
+*credentials*.json
+*secret*.json
+*service-account*.json
+
+# Dependencies and virtual environments
+node_modules/
+.venv/
+venv/
+ENV/
+
+# Runtime data, generated frontend config, and build output
+data.json
+public/config.js
+dist/
+build/
+coverage/
+.cache/
+.vercel/
+.render/
+
+# Logs and operating system files
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+.DS_Store
+Thumbs.db

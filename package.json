@@ -1,0 +1,13 @@
+﻿{
+    "version":  "1.0.0",
+    "name":  "demandbridge",
+    "description":  "DemandBridge procurement workflow MVP",
+    "scripts":  {
+                    "start":  "node server.js",
+                    "build":  "node build.js"
+                },
+    "engines":  {
+                    "node":  "\u003e=20"
+                },
+    "private":  true
+}
