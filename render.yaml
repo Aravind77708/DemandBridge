@@ -1,21 +1,21 @@
 services:
   - type: web
-    name: demandbridge
+    name: demandbridge-api
     runtime: node
-    plan: starter
-    buildCommand: npm run build
+    plan: free
+    buildCommand: npm ci && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_VERSION
         value: 22
-      - key: API_BASE_URL
-        value: ""
-      - key: DATA_FILE
-        value: /var/data/data.json
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
       - key: CORS_ORIGINS
         sync: false
-    disk:
-      name: demandbridge-data
-      mountPath: /var/data
-      sizeGB: 1
+      - key: AUTH_TOKEN_SECRET
+        sync: false
+      - key: DEMO_AUTH_ENABLED
+        value: "false"

@@ -21,11 +21,13 @@ ENV/
 
 # Runtime data, generated frontend config, and build output
 data.json
+.local-pglite/
 public/config.js
 dist/
 build/
 coverage/
 .cache/
+.npm-cache/
 .vercel/
 .render/
 

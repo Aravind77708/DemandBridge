@@ -1,13 +1,27 @@
 {
-    "version":  "1.0.0",
-    "name":  "demandbridge",
-    "description":  "DemandBridge procurement workflow MVP",
-    "scripts":  {
-                    "start":  "node server.js",
-                    "build":  "node build.js"
-                },
-    "engines":  {
-                    "node":  "\u003e=20"
-                },
-    "private":  true
+    "version": "1.0.0",
+    "name": "demandbridge",
+    "description": "DemandBridge procurement workflow MVP",
+    "scripts": {
+        "start": "node server.js",
+        "build": "node build.js",
+        "db:migrate": "node scripts/migrate.js",
+        "db:import-json": "node scripts/import-json.js",
+        "db:seed": "node scripts/seed.js",
+        "auth:create-user": "node scripts/create-user.js",
+        "auth:seed-demo": "node scripts/seed-demo-users.js",
+        "local:db": "node scripts/local-postgres.js",
+        "test": "node --test"
+    },
+    "engines": {
+        "node": ">=20"
+    },
+    "private": true,
+    "dependencies": {
+        "pg": "^8.23.1"
+    },
+    "devDependencies": {
+        "@electric-sql/pglite": "^0.5.15",
+        "@electric-sql/pglite-socket": "^0.2.18"
+    }
 }
